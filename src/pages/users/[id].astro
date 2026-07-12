@@ -1,0 +1,47 @@
+---
+import {
+  getCollection
+}
+from "astro:content";
+
+export async function getStaticPaths() {
+
+  const users =
+    await getCollection("users");
+
+  return users.map((user: any) => ({
+    params: {
+      id: user.id
+    }
+  }));
+}
+
+const users = await getCollection("users");
+const id = (Astro.params as any).id
+const user = users.find(
+  (user: any) => user.id === id
+);
+
+---
+
+<h1>{user?.data.name}</h1>
+
+<p>
+  <strong>Email:</strong>
+  {user?.data.email}
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  {user?.data.phone}
+</p>
+
+<p>
+  <strong>Website:</strong>
+  {user?.data.website}
+</p>
+
+<p>
+  <strong>Company:</strong>
+  {user?.data.company.name}
+</p>

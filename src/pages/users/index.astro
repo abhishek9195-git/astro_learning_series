@@ -1,0 +1,21 @@
+---
+import { getCollection }
+from "astro:content";
+
+const users =
+  await getCollection("users");
+---
+
+<h1>Users Directory</h1>
+
+<ul>
+{
+  users.map((user: any) => (
+    <li>
+      <a href={`/users/${user.id}`}>
+        {user.data.name}
+      </a>
+    </li>
+  ))
+}
+</ul>
