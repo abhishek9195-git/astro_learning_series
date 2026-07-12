@@ -1,0 +1,19 @@
+---
+import BlogCard from './BlogCard.astro'
+
+interface Post {
+    title: string,
+    author: string,
+    excerpt: string
+}
+
+interface Props {
+    posts: Post[]
+}
+
+const {posts} = Astro.props
+---
+
+{
+    posts.map((post) => <BlogCard {...post} />)
+}

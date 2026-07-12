@@ -1,0 +1,27 @@
+---
+interface Props {
+    title: string
+    author: string 
+    excerpt: string
+}
+
+const {title, author, excerpt} = Astro.props
+---
+
+<div class="card">
+    <h2>{title}</h2>
+    <p>Excerpt: {excerpt}</p>
+    <small>Author: {author}</small>
+</div>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        padding: 2rem;
+        justify-content: center;
+        border: 1px solid #f5f5f5;
+    }
+</style>
+

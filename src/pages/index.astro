@@ -1,10 +1,20 @@
 ---
+import BlogCard from '../components/BlogCard.astro';
+import BlogList from '../components/BlogList.astro';
+import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const posts = [
+	{title: 'Angular', author: 'Abhishek', excerpt: 'Test 01'},
+	{title: 'React', author: 'John', excerpt: 'Test 02'},
+	{title: 'Vue', author: 'James', excerpt: 'Test 03'}
+]
 ---
 
 <Layout>
-	<h1>Astro works</h1>
+	<Header title='Blog app' />
+	<BlogList posts={posts}/>
 </Layout>
