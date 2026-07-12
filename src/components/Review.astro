@@ -1,0 +1,16 @@
+---
+const reviews = [
+    'Angular is a great framework to learn', 
+    'Angular is not for beginner developer', 
+    'Angular is much better than react.'
+]
+---
+
+<h1>Reviews</h1>
+<ul>
+    {
+        reviews.map((review) => (
+            <li>{review}</li>
+        ))
+    }
+</ul>
