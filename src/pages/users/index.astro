@@ -1,0 +1,34 @@
+---
+import { getUsers } from "../../services/userService";
+
+let users: any[] = [];
+let error = null;
+
+try {
+  users = await getUsers();
+} catch (err) {
+  error = "Unable to load users.";
+}
+---
+
+<h1>Users Directory</h1>
+
+{
+  error && (
+    <p style="color:red;">
+      {error}
+    </p>
+  )
+}
+
+<ul>
+  {
+    users.map(user => (
+      <li>
+        <a href={`/users/${user.id}`}>
+          {user.name}
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,63 @@
+---
+import { getUsers, getUser }
+from "../../services/userService";
+
+export async function getStaticPaths() {
+  const users = await getUsers();
+
+  return users.map(user => ({
+    params: {
+      id: user.id.toString()
+    }
+  }));
+}
+
+let user = null;
+let error = null;
+
+try {
+  user = await getUser(
+    Astro.params.id!
+  );
+} catch {
+  error = "User not found";
+}
+---
+
+{
+  error ? (
+    <h1>{error}</h1>
+  ) : (
+    <>
+      <h1>{user?.name}</h1>
+
+      <p>
+        <strong>Email:</strong>
+        {" "}
+        {user?.email}
+      </p>
+
+      <p>
+        <strong>Phone:</strong>
+        {" "}
+        {user?.phone}
+      </p>
+
+      <p>
+        <strong>Website:</strong>
+        {" "}
+        {user?.website}
+      </p>
+
+      <p>
+        <strong>Company:</strong>
+        {" "}
+        {user?.company.name}
+      </p>
+
+      <a href={"/users"}>
+        Back To Users
+      </a>
+    </>
+  )
+}
