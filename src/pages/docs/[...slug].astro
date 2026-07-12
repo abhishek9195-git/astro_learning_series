@@ -1,0 +1,17 @@
+---
+import type { GetStaticPaths } from "astro";
+
+
+export const getStaticPaths = (() => {
+    const paths = ['angular/basics', 'angular/routing', 'angular/components']
+
+    return paths.map((path) => ({
+        params: {slug: path}
+    }))
+}) satisfies GetStaticPaths;
+
+const topic = Astro.params.slug
+
+---
+
+<h1>{topic}</h1>

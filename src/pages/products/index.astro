@@ -1,0 +1,13 @@
+---
+const products = [1, 2, 3, 4, 5]
+---
+
+<div class="flex-container">
+    <ul>
+        {
+            products.map((id) => (
+                <li><a href={`/products/${id}`}>Product {id}</a></li>
+            ))
+        }
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+---
+import { BLOG_DATA } from "../../data/blog_data";
+---
+<div class="flex-container">
+    <ul>
+        {
+            BLOG_DATA.map((blog) => (
+                <li><a href={`/blog/${blog.slug}`}>{blog.title}</a></li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .flex-container {
+        display: flex;
+        gap: 1rem;
+    }
+</style>

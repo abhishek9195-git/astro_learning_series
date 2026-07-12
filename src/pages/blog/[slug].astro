@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+
+const {slug} = Astro.params
+console.log(slug);
+
+export const getStaticPaths = (() => {
+    
+    return [
+        { params: {slug: 'astro-basics'}},
+        { params: {slug: 'astro-routing'}},
+        { params: {slug: 'astro-components'}},
+
+    ];
+}) satisfies GetStaticPaths;
+---
+
+<h4>{slug}</h4>
