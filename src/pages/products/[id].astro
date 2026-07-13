@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async () => {
+    const productCollection = await getCollection('products');
+
+    return productCollection.map((product) => ({
+        params: {
+            id: product.data.id
+        }
+    }))
+}) satisfies GetStaticPaths;
+
+const productId = Astro.params.id
+const productCollection = await getCollection('products');
+
+const product = productCollection.find((product) => product.data.id === productId)
+---
+
+<h1>Product {productId}</h1>
+<p>{product?.data.title}</p>
+<a href="/products">Back to all products</a>
+
+

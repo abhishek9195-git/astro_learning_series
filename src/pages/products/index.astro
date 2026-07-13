@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import type { IProduct } from "../../types/Product";
+
+const productCollection = await getCollection('products')
+
+console.log('==> productCollection', productCollection);
+---
+
+<h1>Product List ({productCollection.length})</h1>
+
+<ul>
+    {
+        productCollection.map((product) => (
+            <li><a href={`/products/${product.data.id}`}>{product.data.title}</a></li>
+        ))
+    }
+</ul>
