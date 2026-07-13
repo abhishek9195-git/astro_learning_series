@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import { getProducts } from "../../services/productService";
+import Layout from "../../layouts/Layout.astro";
+const products = await getProducts();
+---
+
+<Layout title="Product seller">
+    <h1>List of Products</h1>
+
+    <div class="grid">
+        {
+            products.map((product) => (
+                <a class="card" href={`/products/${product.id}`}>
+                    <Image
+                        src={product.thumbnail}
+                        alt={`Image of ${product.title}`}
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                        format="webp"
+                    />
+
+                    <h2>{product.title}</h2>
+                </a>
+            ))
+        }
+    </div>
+</Layout>
+
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .card {
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 1rem;
+    }
+
+    .card h2 {
+        margin-top: 1rem;
+    }
+</style>

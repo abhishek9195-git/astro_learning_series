@@ -1,0 +1,42 @@
+---
+import { Image, inferRemoteSize } from "astro:assets";
+
+import { getProducts, getProduct } from "../../services/productService";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const products = await getProducts();
+
+    return products.map((product) => ({
+        params: {
+            id: product.id.toString(),
+        },
+    }));
+}
+
+const product = await getProduct(Astro.params.id!);
+
+const { width, height } = await inferRemoteSize(product.thumbnail);
+---
+
+<Layout title={product.title}>
+    <Image
+        src={product.thumbnail}
+        alt={`Product image for ${product.title}`}
+        width={width}
+        height={height}
+        format="webp"
+    />
+
+    <h2>
+        {product.title}
+    </h2>
+
+    <p>
+        {product.description}
+    </p>
+
+    <p>
+        <a href={"/products"}> ← Back to Products </a>
+    </p>
+</Layout>
