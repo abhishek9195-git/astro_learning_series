@@ -1,0 +1,16 @@
+---
+export const prerender = false;
+
+const role =
+  Astro.cookies.get("role")
+    ?.value;
+---
+
+<h1>User Area</h1>
+
+<p>
+  Logged in as:
+  <p>{role}</p>
+</p>
+
+<a href="/logout">Logout</a>

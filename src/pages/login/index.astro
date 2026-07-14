@@ -1,0 +1,44 @@
+---
+export const prerender = false;
+
+const role =
+  Astro.url.searchParams.get("role");
+
+if (
+  Astro.request.method === "GET" &&
+  (role === "user" || role === "admin")
+) {
+  Astro.cookies.set(
+    "role",
+    role,
+    {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: false,
+    }
+  );
+
+  return Astro.redirect("/");
+}
+---
+
+<h1>Login</h1>
+
+<p>
+  Choose a role:
+</p>
+
+<ul>
+  <li>
+    <a href="/login?role=user">
+      Login as User
+    </a>
+  </li>
+
+  <li>
+    <a href="/login?role=admin">
+      Login as Admin
+    </a>
+  </li>
+</ul>

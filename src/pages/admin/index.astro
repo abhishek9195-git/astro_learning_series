@@ -1,0 +1,22 @@
+---
+export const prerender = false;
+
+const role =
+  Astro.cookies.get("role")
+    ?.value;
+---
+
+<h1>Admin Area</h1>
+
+<p>
+  Logged in as:
+  <strong>{role}</strong>
+</p>
+
+<p>
+  Top Secret Dashboard
+</p>
+
+<a href="/logout">
+  Logout
+</a>

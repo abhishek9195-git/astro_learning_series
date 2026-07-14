@@ -1,10 +1,29 @@
----
-import Layout from '../layouts/Layout.astro';
+<h1>Home</h1>
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
----
+<ul>
+  <li>
+    <a href={'/login?role=user'}>
+      Login as User
+    </a>
+  </li>
 
-<Layout>
-	<h1>Astro works</h1>
-</Layout>
+  <li>
+    <a href={'/login?role=admin'}>
+      Login as Admin
+    </a>
+  </li>
+
+  <li>
+    <a href="/user">User Page</a>
+  </li>
+
+  <li>
+    <a href="/admin">
+      Admin Page
+    </a>
+  </li>
+
+  <li>
+    <a href="/logout">Logout</a>
+  </li>
+</ul>
