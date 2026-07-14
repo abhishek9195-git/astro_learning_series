@@ -1,9 +1,10 @@
 ---
 import { Image, inferRemoteSize } from "astro:assets";
-
+import {z} from 'zod'
 import { getProducts, getProduct } from "../../services/productService";
 import Layout from "../../layouts/Layout.astro";
 
+// === GET STATIC PATHS
 export async function getStaticPaths() {
     const products = await getProducts();
 
@@ -14,9 +15,21 @@ export async function getStaticPaths() {
     }));
 }
 
-const product = await getProduct(Astro.params.id!);
 
+// === ZOD VALIDATION 
+const schema = z.coerce.number().int().positive()
+const result = schema.safeParse(Astro.params.id)
+if(!result.success) {
+    return Astro.redirect('/404');
+}
+const productId = result.data;
+
+
+// === GET PRODUCT
+const product = await getProduct(String(productId));
 const { width, height } = await inferRemoteSize(product.thumbnail);
+
+
 ---
 
 <Layout title={product.title}>
