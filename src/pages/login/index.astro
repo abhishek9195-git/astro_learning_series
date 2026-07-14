@@ -1,0 +1,24 @@
+---
+if (Astro.request.method === "POST") {
+  Astro.cookies.set(
+    "admin",
+    "true",
+    {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: false, // true in production HTTPS
+      path: "/"
+    }
+  );
+
+  return Astro.redirect("/admin");
+}
+---
+
+<h1>Login</h1>
+
+<form method="POST">
+  <button type="submit">
+    Login As Admin
+  </button>
+</form>

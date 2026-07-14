@@ -1,0 +1,51 @@
+---
+
+export const prerender = false;
+
+console.log(
+  "Cookie Header:",
+  Astro.request.headers.get("cookie")
+);
+
+const adminCookie =
+  Astro.cookies.get("admin");
+
+console.log(
+  "Admin Cookie:",
+  adminCookie
+);
+
+
+const isAdmin =
+  adminCookie?.value === "true";
+---
+
+<h1>Is admin: {isAdmin + "-"}</h1>
+{
+  isAdmin ? (
+    <>
+      <h1>Welcome Admin</h1>
+
+      <p>
+        You have access to the admin area.
+      </p>
+    </>
+  ) : (
+    <>
+      <h1>Unauthorized</h1>
+
+      <p>
+        Please login first.
+      </p>
+
+      <a href="/login">
+        Go To Login
+      </a>
+    </>
+  )
+}
+
+
+<a href="/logout">
+  Logout
+</a>
