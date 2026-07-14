@@ -1,0 +1,24 @@
+---
+export const prerender = false;
+
+const user =
+  (Astro.locals as any).user;
+---
+
+<h1>Admin Dashboard</h1>
+
+<p>
+  Welcome
+  {user.username}
+</p>
+
+<p>
+  Role:
+  {user.role}
+</p>
+
+<p>
+  Top Secret Data
+</p>
+
+<a href="/logout">Logout</a>

@@ -1,0 +1,63 @@
+---
+import { users, sessions } from "../lib/auth";
+
+export const prerender = false;
+
+let error = "";
+
+if (Astro.request.method === "POST") {
+    const formData = await Astro.request.formData();
+
+    const username = formData.get("username");
+
+    const password = formData.get("password");
+
+    const user = users.find(
+        (u: any) => u.username === username && u.password === password,
+    );
+
+    if (user) {
+        const sessionId = crypto.randomUUID();
+
+        sessions.set(sessionId, {
+            userId: user.id,
+            username: user.username,
+            role: user.role,
+        });
+
+        Astro.cookies.set("sessionId", sessionId, {
+            path: "/",
+            httpOnly: true,
+            sameSite: "strict",
+        });
+
+        return Astro.redirect("/");
+    }
+
+    error = "Invalid Credentials";
+}
+---
+
+<h1>Login</h1>
+
+{error && <p style="color:red">{error}</p>}
+
+<form method="POST">
+    <div>
+        <label> Username: </label>
+
+        <input name="username" required />
+    </div>
+
+    <br />
+
+    <div>
+        <label> Password: </label>
+
+        <input type="password" name="password" required />
+    </div>
+
+    <br />
+
+    <button> Login </button>
+</form>

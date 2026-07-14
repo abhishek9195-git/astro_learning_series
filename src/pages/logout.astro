@@ -1,0 +1,24 @@
+---
+import { sessions }
+from "../lib/auth";
+
+export const prerender = false;
+
+const sessionId =
+  Astro.cookies
+    .get("sessionId")
+    ?.value;
+
+if (sessionId) {
+  sessions.delete(sessionId);
+}
+
+Astro.cookies.delete(
+  "sessionId",
+  {
+    path: "/"
+  }
+);
+
+return Astro.redirect("/");
+---
